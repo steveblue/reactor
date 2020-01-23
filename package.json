@@ -1,0 +1,18 @@
+{
+  "name": "reactor",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:steveblue/reactor.git",
+  "author": "Steve Belovarich <steveblue@gmail.com>",
+  "description": "CLI for building React with Parcel",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "commander": "^4.1.0",
+    "findup": "^0.1.5"
+  },
+  "bin": {
+    "reactor": "index.js"
+  }
+}
