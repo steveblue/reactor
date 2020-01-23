@@ -1,11 +1,19 @@
-# reactor
+# rctr
 
-CLI for scaffolding React projects built with Parcel.
+CLI for React projects built with Parcel.
 
 ```
-reactor new my-app
+rctr new my-app
 ```
 
 For an example of what gets scaffolded, see [react-starter](https://github.com/steveblue/react-starter).
 
-Clone and run `yarn install` and `yarn link`.
+### Install
+
+```
+npm install rctr
+```
+
+### Dev
+
+Clone this repo, run `yarn install` and `yarn link`.

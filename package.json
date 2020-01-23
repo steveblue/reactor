@@ -1,10 +1,10 @@
 {
-  "name": "reactor",
+  "name": "rctr",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/steveblue/reactor.git",
   "author": "Steve Belovarich <steveblue@gmail.com>",
-  "description": "CLI for building React with Parcel",
+  "description": "React CLI",
   "license": "MIT",
   "type": "module",
   "dependencies": {
@@ -13,6 +13,6 @@
     "findup": "^0.1.5"
   },
   "bin": {
-    "reactor": "index.js"
+    "rctr": "index.js"
   }
 }
