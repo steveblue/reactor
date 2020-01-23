@@ -2,7 +2,7 @@
   "name": "reactor",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "git@github.com:steveblue/reactor.git",
+  "repository": "https://github.com/steveblue/reactor.git",
   "author": "Steve Belovarich <steveblue@gmail.com>",
   "description": "CLI for building React with Parcel",
   "license": "MIT",
