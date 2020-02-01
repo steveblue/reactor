@@ -10,7 +10,11 @@
   "dependencies": {
     "chalk": "^3.0.0",
     "commander": "^4.1.0",
-    "findup": "^0.1.5"
+    "findup": "^0.1.5",
+    "ora": "^4.0.3",
+    "rimraf": "^3.0.1",
+    "shelljs": "^0.8.3",
+    "single-line-log": "^1.1.2"
   },
   "bin": {
     "rctr": "index.js"

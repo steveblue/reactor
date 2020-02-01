@@ -1,13 +1,16 @@
 import chalk from 'chalk';
-import { exec } from 'child_process';
+import rimraf from 'rimraf';
+import { exec, spawn } from 'child_process';
 import { resolve } from 'path';
 import { readFile, writeFile } from 'fs';
 
+import { log } from './../util/log.js';
+
 // TODO: resolve callback hell
-function project(name) {
-    process.stdout.write(chalk.yellow(`\nBootstrapping ${name}`));
+export function project(name) {
+    log.start(`rctr ${name}`);
     exec(`git clone https://github.com/steveblue/react-starter.git ${name}`, {}, (error, stdout, stderr) => {
-        process.stdout.write(chalk.blue(`\nInstalling dependencies...`));
+        log.process(`bootstrap`);
         readFile(resolve(`./${name}/package.json`), 'utf8', (err, pkg) => {
             if (err) {
                 throw err;
@@ -20,13 +23,15 @@ function project(name) {
                     if (err) {
                         throw err;
                     } else {
-                        exec(`rm -rf .git`, { cwd: resolve(`./${name}`) }, (err, stdout, stderr) => {
+                        rimraf(resolve(`./${name}/.git`), {}, () => {
+                            log.process(`git init`);
                             exec(`git init`, { cwd: resolve(`./${name}`) }, (err, stdout, stderr) => {
-                                exec(`yarn install`, { cwd: resolve(`./${name}`) }, (err, stdout, stderr) => {
+                                log.process(`yarn install`);
+                                exec(`yarn install`, { cwd: resolve(`./${name}`) }, (err) => {
                                     if (err) {
                                         throw err;
                                     } else {
-                                        process.stdout.write(chalk.green(`\nInstallation complete\n`));
+                                        log.complete(chalk.green(`rctr complete`));
                                     }
                                 });
                             });
@@ -38,5 +43,3 @@ function project(name) {
         })
     });
 }
-
-export { project };

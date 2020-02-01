@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import { readFileSync } from 'fs';
 
 import { project } from './cmd/project.js';
+import { log } from './util/log.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const pkg = readFileSync(__dirname + '/package.json');
@@ -19,12 +20,9 @@ commander
 const exitHandler = (options, err) => {
     if (err && err !== 'SIGINT') {
         process.stdout.write('\n');
-        process.stdout.write(chalk.red('RCTR ERROR', err));
+        log.error('RCTR ERROR', err);
         process.stdout.write('\n');
         process.exit(1);
-    }
-    if (options.exit) {
-        process.exit(0);
     }
 };
 
@@ -42,7 +40,7 @@ process.on('SIGUSR2', exitHandler.bind(null, { exit: true }));
 process.on('uncaughtException', exitHandler.bind(null, { exit: true }));
 process.on('unhandledRejection', err => {
   process.stdout.write('\n');
-  process.stdout.write(chalk.red('RCTR ERROR', err))
+  log.error('RCTR ERROR', err);
   process.stdout.write('\n');
 });
 
