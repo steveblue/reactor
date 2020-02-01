@@ -6,13 +6,13 @@
   "author": "Steve Belovarich <steveblue@gmail.com>",
   "description": "React CLI",
   "license": "MIT",
-  "type": "module",
   "dependencies": {
     "chalk": "^3.0.0",
     "commander": "^4.1.0",
     "findup": "^0.1.5",
     "ora": "^4.0.3",
     "rimraf": "^3.0.1",
+    "rxjs": "^6.5.4",
     "shelljs": "^0.8.3",
     "single-line-log": "^1.1.2"
   },

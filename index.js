@@ -1,14 +1,10 @@
 #!/usr/bin/env node
-import commander from 'commander';
-import chalk from 'chalk';
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
-import { readFileSync } from 'fs';
+const commander = require('commander');
+const { readFileSync } = require('fs');
 
-import { project } from './cmd/project.js';
-import { log } from './util/log.js';
+const project = require('./cmd/project.js');
+const log = require('./util/log.js');
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
 const pkg = readFileSync(__dirname + '/package.json');
 
 commander
