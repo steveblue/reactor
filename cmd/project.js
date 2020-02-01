@@ -79,8 +79,6 @@ function install(name) {
 }
 
 
-
-// TODO: resolve callback hell
 function project(name) {
     log.start(`rctr ${name}`);
     of(name).pipe(
