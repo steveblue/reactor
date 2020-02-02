@@ -2,25 +2,23 @@ const template = {
 'fn-component': `
 import React from "react";
 
-function {{name}}() {
+export default function {{name}}() {
     return (
         <h1>{{name}} works!</h1>
     );
 }
 
-export { {{name}} }
 `,
 'arrow-fn-component': `
 import React from "react";
 
-const {{name}} = () => <h1>{{name}} works!</h1>;
+export default const {{name}} = () => <h1>{{name}} works!</h1>;
 
-export { {{name}} }
 `,
 'component': `
 import React from "react";
 
-class {{name}} extends React.Component {
+export default class {{name}} extends React.Component {
     public render(): JSX.Element {
         return (
             <h1>{{name}} works!</h1>
@@ -28,7 +26,6 @@ class {{name}} extends React.Component {
     }
 }
 
-export { {{name}} }
 `,
     'view': `
 import React from "react";
@@ -44,6 +41,7 @@ export default class {{name}} extends React.Component {
         );
     }
 }
+
 `,
 'ssr': `
 import React from "react";
@@ -63,12 +61,13 @@ export default class {{name}} extends React.Component {
         );
     }
 }
+
 `,
 'enzyme-test': `
 import React from "react";
 import { shallow } from "enzyme";
 
-import { {{name}} } from "./{{name}}";
+import {{name}} from "./{{name}}";
 
 describe("{{name}} tests", () => {
     it("renders", () => {
@@ -76,6 +75,7 @@ describe("{{name}} tests", () => {
         expect(wrapper).toBeDefined();
     });
 });
+
 `,
 'state': `
 const {{name}}State = {
@@ -90,6 +90,7 @@ function reducer(state, action) {
 }
 
 export { {{name}}State, reducer }
+
 `
 }
 
