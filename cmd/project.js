@@ -87,7 +87,7 @@ function project(name) {
         concatMap(results => initRepo(results)),
         concatMap(results => install(results)),
         map(name => {
-            log.complete(chalk.green(`${name} scaffold complete`));
+            log.complete(chalk.green(`${name} bootstrapped`));
         }),
         catchError(error => {
             log.error(err);

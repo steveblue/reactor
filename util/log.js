@@ -84,7 +84,8 @@ class Log {
 
     complete(msg) {
         this.spinner.stop();
-        process.stdout.write(msg  + '\n');
+        process.stdout.write(msg);
+        process.stdout.write('\n');
     }
 
     success(msg, services) {
@@ -116,8 +117,8 @@ class Log {
     }
 
     error(err) {
-        err = err ? '' + chalk.red(err) : '';
-        process.stdout.write(err);
+        //err = err ? '' + chalk.red(err) : '';
+        process.stdout.write(chalk.red(err));
         process.stdout.write('\n');
     }
 
