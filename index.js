@@ -10,7 +10,7 @@ commander
   .version(pkg.version)
   .usage('<keywords>')
   .option('new [string]', 'scaffold new project in directory by name, i.e. rctr new my-app')
-  .option('generate, g <type> [name]', 'generate code snippets in the current working directory, i.e. rctr generate component home')
+  .option('generate <type> [name]', 'generate code snippets in the current working directory, i.e. rctr generate component home')
   .parse(process.argv);
 
 const exitHandler = (options, err) => {
@@ -39,12 +39,16 @@ process.on('uncaughtException', exitHandler.bind(null, { exit: true }));
 process.on('unhandledRejection', exitHandler.bind(null, { exit: true }));
 
 if (commander.new) {
-  project(commander.new);
+  project({
+    name: commander.new,
+    args: commander.args
+  });
 }
 
 if (commander.generate) {
   generate({
     type: commander.generate,
-    name: commander.args[0]
+    name: commander.args[0],
+    args: commander.args
   });
 }

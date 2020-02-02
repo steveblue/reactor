@@ -8,35 +8,35 @@ const { catchError, map, concatMap } = require('rxjs/operators');
 
 const log = require('./../util/log.js');
 
-function clone(name) {
+function clone(options) {
     return new Observable((observer) => {
         log.process(`clone`);
-        exec(`git clone https://github.com/steveblue/react-starter.git ${name}`, {}, (error, stdout, stderr) => {
+        exec(`git clone https://github.com/steveblue/react-starter.git ${options.name}`, {}, (error, stdout, stderr) => {
             if (stderr.includes('Error')) {
               observer.error(error);
             } else {
-              observer.next(name);
+              observer.next(options);
             }
         });
     });
 }
 
-function processPackage(name) {
+function processPackage(options) {
     return new Observable((observer) => {
         log.process(`bootstrap`);
-        readFile(resolve(`./${name}/package.json`), 'utf8', (err, pkg) => {
+        readFile(resolve(`./${options.name}/package.json`), 'utf8', (err, pkg) => {
             if (err) {
                 observer.error(err);
             } else {
                 pkg = JSON.parse(pkg);
-                pkg.name = name;
+                pkg.name = options.name;
                 pkg.version = '1.0.0';
                 pkg = JSON.stringify(pkg, null, 4);
-                writeFile(resolve(`./${name}/package.json`), pkg, err => {
+                writeFile(resolve(`./${options.name}/package.json`), pkg, err => {
                     if (err) {
                       observer.error(err);
                     } else {
-                      observer.next(name);
+                      observer.next(options);
                     }
                 });
             }
@@ -44,19 +44,19 @@ function processPackage(name) {
     });
 }
 
-function initRepo(name) {
+function initRepo(options) {
     return new Observable((observer) => {
         log.process(`git init`);
-        rimraf(resolve(`./${name}/.git`), {}, (err) => {
+        rimraf(resolve(`./${options.name}/.git`), {}, (err) => {
             if (err) {
                 observer.error(err);
             } else {
-                exec(`git init`, { cwd: resolve(`./${name}`) }, (err, stdout, stderr) => {
+                exec(`git init`, { cwd: resolve(`./${options.name}`) }, (err, stdout, stderr) => {
                     log.process(`yarn install`);
                     if (err) {
                         observer.error(err);
                     } else {
-                        observer.next(name);
+                        observer.next(options);
                     }
                 });
             }
@@ -64,14 +64,14 @@ function initRepo(name) {
     });
 }
 
-function install(name) {
+function install(options) {
     return new Observable((observer) => {
         log.process(`yarn install`);
-        exec(`yarn install`, { cwd: resolve(`./${name}`) }, (err) => {
+        exec(`yarn install`, { cwd: resolve(`./${options.name}`) }, (err) => {
             if (err) {
                 observer.error(err);
             } else {
-                observer.next(name);
+                observer.next(options);
                 observer.complete();
             }
         });
@@ -79,15 +79,15 @@ function install(name) {
 }
 
 
-function project(name) {
-    log.start(`rctr ${name}`);
-    of(name).pipe(
+function project(options) {
+    log.start(`rctr ${options.name}`);
+    of(options).pipe(
         concatMap(results => clone(results)),
         concatMap(results => processPackage(results)),
         concatMap(results => initRepo(results)),
         concatMap(results => install(results)),
-        map(name => {
-            log.complete(chalk.green(`${name} bootstrapped`));
+        map(options => {
+            log.complete(chalk.green(`${options.name} bootstrapped`));
         }),
         catchError(error => {
             log.error(err);
