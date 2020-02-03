@@ -1,4 +1,5 @@
 const chalk = require('chalk');
+const findup = require('findup');
 const mkdir = require('shelljs').mkdir;
 const { join, dirname, basename, resolve } = require('path');
 const { writeFile, existsSync } = require( 'fs');
@@ -10,6 +11,26 @@ const template = require('./template/index.js');
 
 const cwd = join(dirname(process.cwd()), basename(process.cwd()));
 
+function getType(type) {
+    switch (type) {
+      case 'fc':
+        return 'fn-component';
+      case 'afc':
+        return 'arrow-fn-component';
+      case 'c':
+        return 'component';
+      case 'v':
+        return 'view';
+      case 'ssr':
+        return 'ssr';
+      case 't':
+        return 'enzyme-test';
+      case 's':
+        return 'state';
+      default:
+        return -1;
+    }
+  }
 
 function toKebabCase(str) {
     return str.match(/[A-Z]{2,}(?=[A-Z][a-z]+[0-9]*|\b)|[A-Z]?[a-z]+[0-9]*|[A-Z]|[0-9]+/g)
@@ -17,9 +38,24 @@ function toKebabCase(str) {
               .join('-');
 }
 
+
+function init(options) {
+    return new Observable((observer) => {
+        try {
+            const projectDir = findup.sync(cwd, 'package.json');
+        } catch(e) {
+            observer.error(`The generate command requires a project, a package.json could not be found.`);
+        }
+        observer.next(options);
+    });
+}
+
 function getTemplate(options) {
     return new Observable((observer) => {
         log.process(`analyze template`);
+        if (getType(options.type) !== -1) {
+            options.type = getType(options.type);
+        }
         const temp = template[options.type];
         observer.next([options, temp]);
     });
@@ -71,6 +107,9 @@ function saveTemplate([options, exports]) {
         if (basename(process.cwd()) !== exportDirName) {
             exportDir = resolve(`${cwd}/${exportDirName}`)
         }
+        if (existsSync(exportDir)) {
+            observer.error(`${exportDirName} already exists`);
+        }
         if (!existsSync(exportDir)) {
             mkdir(exportDir);
         }
@@ -89,15 +128,17 @@ function saveTemplate([options, exports]) {
 function generate(options) {
     log.start(`rctr generate ${options.type} ${options.name}`);
     of(options).pipe(
+        concatMap(results => init(results)),
         concatMap(results => getTemplate(results)),
         concatMap(results => processTemplate(results)),
         concatMap(results => saveTemplate(results)),
         map(options => {
-            log.complete(chalk.green(`${options.name.toLowerCase()} generated`));
+            log.complete(chalk.green(`${options.name.toLowerCase()} created`));
             process.exit(0);
         }),
         catchError(error => {
             log.error(error);
+            process.exit(1);
         })
     ).subscribe()
 }

@@ -1,17 +1,35 @@
 #!/usr/bin/env node
-const commander = require('commander');
+const program = require('commander');
 const { readFileSync } = require('fs');
 const project = require('./cmd/project.js');
 const generate = require('./cmd/generate.js');
 
 const pkg = readFileSync(__dirname + '/package.json');
 
-commander
-  .version(pkg.version)
-  .usage('<keywords>')
-  .option('new [string]', 'scaffold new project in directory by name, i.e. rctr new my-app')
-  .option('generate <type> [name]', 'generate code snippets in the current working directory, i.e. rctr generate component home')
-  .parse(process.argv);
+program.version(pkg.version);
+
+program.command('new <name>', {executableFile: './cmd/project.js'})
+        .alias('n')
+        .description('scaffold new project')
+        .action((name) => {
+          return project({
+            name: name,
+            args: program.args
+          });
+        });
+
+program.command('generate <type> <name>', {executableFile: './cmd/generate.js'})
+        .alias('g')
+        .description('generate code snippet')
+        .action((type, name) => {
+          return generate({
+            type: type,
+            name: name,
+            args: program.args
+          });
+        });
+
+program.parse(process.argv);
 
 const exitHandler = (options, err) => {
     if (err === 0 || err === 1) {
@@ -37,18 +55,3 @@ process.on('SIGUSR2', exitHandler.bind(null, { exit: true }));
 //catches uncaught exceptions
 process.on('uncaughtException', exitHandler.bind(null, { exit: true }));
 process.on('unhandledRejection', exitHandler.bind(null, { exit: true }));
-
-if (commander.new) {
-  project({
-    name: commander.new,
-    args: commander.args
-  });
-}
-
-if (commander.generate) {
-  generate({
-    type: commander.generate,
-    name: commander.args[0],
-    args: commander.args
-  });
-}
