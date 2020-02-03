@@ -91,6 +91,15 @@ function reducer(state, action) {
 
 export { {{name}}State, reducer }
 
+`,
+'route': `
+    <Route exact={true} path="/{{routeName}}" component={{{name}}} />
+`,
+'lazy-route': `
+    <Route exact={true} path="/{{routeName}}" render={() => <{{name}} />} />
+`,
+'imported-component': `
+const {{name}} = importComponent(() => import("./{{path}}/{{name}}"));
 `
 }
 

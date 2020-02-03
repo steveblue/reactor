@@ -14,7 +14,7 @@ program.command('new <name>', {executableFile: './cmd/project.js'})
         .action((name) => {
           return project({
             name: name,
-            args: program.args
+            args: {}
           });
         });
 
@@ -25,11 +25,16 @@ program.command('generate <type> <name>', {executableFile: './cmd/generate.js'})
           return generate({
             type: type,
             name: name,
-            args: program.args
+            args: {
+              routing: program.routing,
+              lazy: program.lazy
+            }
           });
         });
 
-program.parse(process.argv);
+program.option('-r, --routing', 'add route for component (generate)')
+      .option('-l, --lazy', 'lazyload component (generate)')
+      .parse(process.argv);
 
 const exitHandler = (options, err) => {
     if (err === 0 || err === 1) {
