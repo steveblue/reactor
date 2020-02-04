@@ -3,7 +3,7 @@
 CLI for React projects built with Parcel.
 
 ```
-rctr new my-app
+rx new my-app
 ```
 
 For an example of what gets scaffolded, see [react-starter](https://github.com/steveblue/react-starter).
