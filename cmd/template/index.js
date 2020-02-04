@@ -92,6 +92,9 @@ function reducer(state, action) {
 export { {{name}}State, reducer }
 
 `,
+'import': `
+import {{name}} from ".{{path}}/{{name}}.tsx";
+`,
 'route': `
     <Route exact={true} path="/{{routeName}}" component={{{name}}} />
 `,
@@ -99,7 +102,7 @@ export { {{name}}State, reducer }
     <Route exact={true} path="/{{routeName}}" render={() => <{{name}} />} />
 `,
 'imported-component': `
-const {{name}} = importComponent(() => import("./{{path}}/{{name}}"));
+const {{name}} = importComponent(() => import(".{{path}}/{{name}}"));
 `
 }
 

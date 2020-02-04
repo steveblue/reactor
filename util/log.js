@@ -70,6 +70,14 @@ class Log {
         process.stderr.write('\x1B[?25l');
     }
 
+    print(msg) {
+        //this.spinner.stop();
+        msg = msg ? '' + chalk.white(msg) : '';
+        this.logger(msg);
+        process.stderr.write('\x1B[?25l');
+        this.break();
+    }
+
     start(msg) {
         msg = msg ? '' + chalk.white(msg) : '';
         this.spinner.text = msg;

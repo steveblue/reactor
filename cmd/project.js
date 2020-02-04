@@ -87,7 +87,7 @@ function project(options) {
         concatMap(results => initRepo(results)),
         concatMap(results => install(results)),
         map(options => {
-            log.complete(chalk.green(`${options.name} bootstrapped`));
+            log.complete(chalk.green(`${options.name} created`));
         }),
         catchError(error => {
             log.error(err);
