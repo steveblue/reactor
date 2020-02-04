@@ -27,7 +27,7 @@ export default class {{name}} extends React.Component {
 }
 
 `,
-    'view': `
+'view': `
 import React from "react";
 
 import "./{{styleName}}.scss";
@@ -90,6 +90,28 @@ function reducer(state, action) {
 }
 
 export { {{name}}State, reducer }
+
+`,
+'hook': `
+import React, { useState, useEffect } from "react";
+
+function {{name}}(props) {
+  const [] = useState(null);
+
+  useEffect(() => {
+    return;
+  });
+
+  return;
+}
+
+`,
+'context': `
+import React from "react";
+
+const {{name}}Context = React.createContext({});
+
+export { {{name}}Context };
 
 `,
 'import': `

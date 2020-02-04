@@ -31,6 +31,10 @@ function getType(type) {
         return 'enzyme-test';
         case 's':
         return 'state';
+        case 'h':
+        return 'hook';
+        case 'ctx':
+        return 'context';
         default:
         return -1;
     }
@@ -78,6 +82,12 @@ function processTemplate([options, temp]) {
         if (options.type === 'state') {
             fileName = `${toKebabCase(fileName)}.state`;
         }
+        if (options.type === 'hook') {
+            fileName = `${toKebabCase(fileName)}.hook`;
+        }
+        if (options.type === 'context') {
+            fileName = `${toKebabCase(fileName)}.context`;
+        }
         temp = temp.replace(name, options.name);
         temp = temp.replace(styleName, options.name);
         exports.push({
@@ -110,7 +120,14 @@ function saveTemplate([options, exports]) {
         if (basename(process.cwd()) !== exportDirName) {
             exportDir = resolve(`${cwd}/${exportDirName}`)
         }
-        if (existsSync(exportDir)) {
+
+        if (existsSync(exportDir) &&
+            existsSync(resolve(`${exportDir}/${options.name}.tsx`)) &&
+            (options.type === 'view' ||
+            options.type === 'component' ||
+            options.type === 'fn-component' ||
+            options.type === 'arrow-fn-component' ||
+            options.type === 'ssr')) {
             observer.error(`${exportDirName} already exists`);
         }
         if (!existsSync(exportDir)) {

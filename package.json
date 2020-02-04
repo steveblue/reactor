@@ -19,6 +19,6 @@
     "single-line-log": "^1.1.2"
   },
   "bin": {
-    "rctr": "index.js"
+    "rx": "index.js"
   }
 }

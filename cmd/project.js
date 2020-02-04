@@ -89,7 +89,7 @@ function project(options) {
         map(options => {
             log.complete(chalk.green(`${options.name} created`));
         }),
-        catchError(error => {
+        catchError(err => {
             log.error(err);
         })
     ).subscribe()
