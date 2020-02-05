@@ -137,8 +137,8 @@ function saveTemplate([options, exports]) {
         options.exportDir = exportDir;
 
         exports.forEach((ext, i) => {
+            options.results.push(`${ext.file} created`);
             writeFile(resolve(`${exportDir}/${ext.file}`), ext.content, 'utf-8', () => {
-                options.results.push(`${ext.file} created`);
                 if (i === exports.length - 1) {
                     observer.next(options);
                 }
