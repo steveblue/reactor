@@ -60,7 +60,7 @@ The first argument `--routing` adds a route to the nearest implementation of Rea
 <Route exact={true} path="/about" render={() => <About />} />
 ```
 
-The second argument lazyloads the component.
+The second argument `--lazy` optionally lazyloads the component.
 
 ```
 const About = importComponent(() => import("./view/about/About"));
