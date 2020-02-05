@@ -41,18 +41,18 @@ For an example of what gets scaffolded, see [react-starter](https://github.com/s
 
 `rx generate view Map`
 
-Map.tsx created
-Map.spec.tsx created
-Map.scss created
+- Map.tsx created
+- Map.spec.tsx created
+- Map.scss created
 
 Some generators support optional arguments `--routing` and `--lazy`.
 
 `rx g ssr About --routing --lazy`
 
-About.tsx created
-About.spec.tsx created
-About.scss created
-App.tsx has new routes
+- About.tsx created
+- About.spec.tsx created
+- About.scss created
+- App.tsx has new routes
 
 The first argument `--routing` adds a route to the nearest implementation of React Router.
 
