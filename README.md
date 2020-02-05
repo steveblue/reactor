@@ -26,16 +26,16 @@ For an example of what gets scaffolded, see [react-starter](https://github.com/s
 
 `rx generate` scaffolds code snippets in the directory the command is run. A list of arguments are below.
 
-| type               | file                                       |
-| ------------------ | ------------------------------------------ |
-| fn-component       | pure function component                    |
-| arrow-fn-component | arrow function component                   |
-| component          | class component                            |
-| view               | class component with imported styles, test |
-| ssr                | server-side rendered view                  |
-| test               | spec file                                  |
-| state              | state with reducer                         |
-| context            | context                                    |
+| type                    | file                                       |
+| ----------------------- | ------------------------------------------ |
+| fn-component, fc        | pure function component                    |
+| arrow-fn-component, afc | arrow function component                   |
+| component, c            | class component                            |
+| view, v                 | class component with imported styles, test |
+| ssr                     | server-side rendered view                  |
+| test, t                 | spec file                                  |
+| state, s                | state with reducer                         |
+| context , ctx           | context                                    |
 
 #### Example
 
