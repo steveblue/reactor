@@ -1,11 +1,10 @@
-const chalk = require('chalk');
 const findup = require('findup');
 const glob = require("glob");
 const mkdir = require('shelljs').mkdir;
 const grep = require('shelljs').grep;
 const prettier = require("prettier");
 const { join, dirname, basename, resolve } = require('path');
-const { writeFile, existsSync, readFile } = require( 'fs');
+const { writeFile, existsSync, readFile } = require('fs');
 const { Observable, of } = require('rxjs');
 const { catchError, map, concatMap } = require('rxjs/operators');
 

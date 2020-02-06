@@ -26,6 +26,8 @@ For an example of what gets scaffolded, see [react-starter](https://github.com/s
 
 `rx generate` scaffolds code snippets in the directory the command is run. A list of arguments are below.
 
+![](img/rx-generate-demo.gif)
+
 | type                    | file                                       |
 | ----------------------- | ------------------------------------------ |
 | fn-component, fc        | pure function component                    |

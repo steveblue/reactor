@@ -2,7 +2,7 @@ const chalk = require('chalk');
 const rimraf = require('rimraf');
 const { exec } = require('child_process');
 const { resolve } = require('path');
-const { readFile, writeFile } = require( 'fs');
+const { readFile, existsSync, writeFile } = require( 'fs');
 const { Observable, of } = require('rxjs');
 const { catchError, map, concatMap } = require('rxjs/operators');
 
@@ -78,10 +78,21 @@ function install(options) {
     });
 }
 
+function check(options) {
+    return new Observable((observer) => {
+        if (existsSync(resolve(`./${options.name}`))) {
+            observer.error(`${options.name} already exists`);
+        } else {
+            observer.next(options);
+        }
+    });
+}
+
 
 function project(options) {
     log.start(`rctr ${options.name}`);
     of(options).pipe(
+        concatMap(results => check(results)),
         concatMap(results => clone(results)),
         concatMap(results => processPackage(results)),
         concatMap(results => initRepo(results)),
@@ -91,6 +102,7 @@ function project(options) {
         }),
         catchError(err => {
             log.error(err);
+            process.exit(1);
         })
     ).subscribe()
 }
