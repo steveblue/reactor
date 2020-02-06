@@ -1,6 +1,6 @@
 {
   "name": "rctr",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "index.js",
   "repository": "https://github.com/steveblue/reactor.git",
   "author": "Steve Belovarich <steveblue@gmail.com>",
@@ -10,13 +10,15 @@
     "chalk": "^3.0.0",
     "commander": "^4.1.0",
     "findup": "^0.1.5",
+    "glob": "^7.1.6",
     "ora": "^4.0.3",
+    "prettier": "^1.19.1",
     "rimraf": "^3.0.1",
     "rxjs": "^6.5.4",
     "shelljs": "^0.8.3",
     "single-line-log": "^1.1.2"
   },
   "bin": {
-    "rctr": "index.js"
+    "rx": "index.js"
   }
 }

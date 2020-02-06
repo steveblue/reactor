@@ -70,6 +70,14 @@ class Log {
         process.stderr.write('\x1B[?25l');
     }
 
+    print(msg) {
+        //this.spinner.stop();
+        msg = msg ? '' + chalk.white(msg) : '';
+        this.logger(msg);
+        process.stderr.write('\x1B[?25l');
+        this.break();
+    }
+
     start(msg) {
         msg = msg ? '' + chalk.white(msg) : '';
         this.spinner.text = msg;
@@ -84,7 +92,8 @@ class Log {
 
     complete(msg) {
         this.spinner.stop();
-        process.stdout.write(msg  + '\n');
+        process.stdout.write(msg);
+        process.stdout.write('\n');
     }
 
     success(msg, services) {
@@ -116,8 +125,8 @@ class Log {
     }
 
     error(err) {
-        err = err ? '' + chalk.red(err) : '';
-        process.stdout.write(err);
+        //err = err ? '' + chalk.red(err) : '';
+        process.stdout.write(chalk.red(err));
         process.stdout.write('\n');
     }
 
