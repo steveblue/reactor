@@ -24,9 +24,11 @@ For an example of what gets scaffolded, see [react-starter](https://github.com/s
 
 ### generate
 
-`rx generate` scaffolds code snippets in the directory the command is run. A list of arguments are below.
+`rx generate` scaffolds code snippets in the directory the command is run.
 
 ![](img/rx-generate-demo.gif)
+
+Here is a list of arguments the `rx generate` command will take.
 
 | type                    | file                                       |
 | ----------------------- | ------------------------------------------ |
