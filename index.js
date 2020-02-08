@@ -8,26 +8,27 @@ const pkg = readFileSync(__dirname + '/package.json');
 
 program.version(pkg.version);
 
-program.command('start', {executableFile: './cmd/alias.js'})
-        .description('start dev server')
-        .action((type, name) => {
-          return alias({ cmd: 'start'});
-        });
-
 program.command('dev', {executableFile: './cmd/alias.js'})
+        .alias('start')
         .description('start dev server')
         .action((type, name) => {
           return alias({ cmd: 'dev'});
         });
 
 program.command('dev:ssr', {executableFile: './cmd/alias.js'})
-        .description('start dev server in ssr mode')
+        .description('start dev server server-side rendered')
         .action((type, name) => {
           return alias({ cmd: 'dev:ssr'});
         });
 
+program.command('ssr', {executableFile: './cmd/alias.js'})
+        .description('build project server-side rendered')
+        .action((type, name) => {
+          return alias({ cmd: 'ssr'});
+        });
+
 program.command('prod', {executableFile: './cmd/alias.js'})
-        .description('build production server')
+        .description('build project for production')
         .action((type, name) => {
           return alias({ cmd: 'prod'});
         });
@@ -39,7 +40,7 @@ program.command('serve', {executableFile: './cmd/alias.js'})
         });
 
 program.command('test', {executableFile: './cmd/alias.js'})
-        .description('run unit tests')
+        .description('execute unit tests')
         .action((type, name) => {
           return alias({ cmd: 'test'});
         });
@@ -51,13 +52,13 @@ program.command('lint', {executableFile: './cmd/alias.js'})
         });
 
 program.command('storybook', {executableFile: './cmd/alias.js'})
-        .description('run storybook server')
+        .description('start storybook server')
         .action((type, name) => {
           return alias({ cmd: 'storybook'});
         });
 
 program.command('pretty', {executableFile: './cmd/alias.js'})
-        .description('run prettier')
+        .description('style source code with prettier')
         .action((type, name) => {
           return alias({ cmd: 'pretty'});
         });
