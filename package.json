@@ -1,6 +1,6 @@
 {
   "name": "rctr",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "index.js",
   "repository": "https://github.com/steveblue/reactor.git",
   "author": "Steve Belovarich <steveblue@gmail.com>",
