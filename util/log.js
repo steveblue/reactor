@@ -30,6 +30,10 @@ class Log {
         return process.argv.indexOf(arg) > -1 || process.argv.indexOf('--'+arg) > -1;
     }
 
+    pause() {
+        this.spinner.stop();
+    }
+
     destroy() {
         this.spinner.stop();
         process.stdout.write('\x1B[2J\x1B[0f\u001b[0;0H');

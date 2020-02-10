@@ -3,10 +3,65 @@ const program = require('commander');
 const { readFileSync } = require('fs');
 const project = require('./cmd/project.js');
 const generate = require('./cmd/generate.js');
-
+const alias = require('./cmd/alias.js');
 const pkg = readFileSync(__dirname + '/package.json');
 
 program.version(pkg.version);
+
+program.command('dev', {executableFile: './cmd/alias.js'})
+        .alias('start')
+        .description('start dev server')
+        .action((type, name) => {
+          return alias({ cmd: 'dev'});
+        });
+
+program.command('dev:ssr', {executableFile: './cmd/alias.js'})
+        .description('start dev server server-side rendered')
+        .action((type, name) => {
+          return alias({ cmd: 'dev:ssr'});
+        });
+
+program.command('ssr', {executableFile: './cmd/alias.js'})
+        .description('build project server-side rendered')
+        .action((type, name) => {
+          return alias({ cmd: 'ssr'});
+        });
+
+program.command('prod', {executableFile: './cmd/alias.js'})
+        .description('build project for production')
+        .action((type, name) => {
+          return alias({ cmd: 'prod'});
+        });
+
+program.command('serve', {executableFile: './cmd/alias.js'})
+        .description('start server')
+        .action((type, name) => {
+          return alias({ cmd: 'serve'});
+        });
+
+program.command('test', {executableFile: './cmd/alias.js'})
+        .description('execute unit tests')
+        .action((type, name) => {
+          return alias({ cmd: 'test'});
+        });
+
+program.command('lint', {executableFile: './cmd/alias.js'})
+        .description('run linter')
+        .action((type, name) => {
+          return alias({ cmd: 'lint'});
+        });
+
+program.command('storybook', {executableFile: './cmd/alias.js'})
+        .description('start storybook server')
+        .action((type, name) => {
+          return alias({ cmd: 'storybook'});
+        });
+
+program.command('pretty', {executableFile: './cmd/alias.js'})
+        .description('style source code with prettier')
+        .action((type, name) => {
+          return alias({ cmd: 'pretty'});
+        });
 
 program.command('new <name>', {executableFile: './cmd/project.js'})
         .alias('n')
