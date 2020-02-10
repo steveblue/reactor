@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.5
+
+- NEW alias for common tasks, i.e. `rx start` aliases `yarn start`.
+
 ## 1.0.4
 
 - NEW generate command scaffolds code snippets
